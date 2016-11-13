@@ -1,2 +1,2 @@
 # -raiden-personal-project-
-small game developed using Ruby
+a small raiden game developed using Ruby
