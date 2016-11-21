@@ -1,7 +1,8 @@
 class Player
 	ROTATION_SPEED=2 
 	ACCELERATION=2
-	FRICTION=0.9
+	FRICTION=0.5
+	attr_reader :x, :y, :angle, :radius
 	def initialize(window)
 		@x=200
 		@y=200
@@ -10,7 +11,7 @@ class Player
 		@velocity_x=0
 		@velocity_y=0
 		@window=window
-		@radius=0
+		@radius=20
 	end
 	def draw
 	@image.draw_rot(@x,@y,1,@angle)
