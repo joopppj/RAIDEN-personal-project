@@ -2,6 +2,7 @@ require 'gosu'
 require_relative 'player'
 require_relative 'enemy'
 require_relative 'shoot'
+require_relative 'explosion'
 class RAIDEN < Gosu::Window
 	 WIDTH = 800
   HEIGHT = 600
@@ -13,6 +14,7 @@ class RAIDEN < Gosu::Window
 		@player = Player.new(self)
 		@enemies=[]
 		@shoots=[]
+        @explosions=[]
 	end
 	def update
 		@player.turn_left if button_down?(Gosu::KbLeft)
@@ -33,8 +35,9 @@ class RAIDEN < Gosu::Window
         				distance = Gosu.distance(enemy.getx, enemy.gety, bullet.x, bullet.y)
         				if distance < enemy.radius + bullet.radius
           				@enemies.delete enemy
-          					@shoots.delete bullet           
-        					end
+                        @shoots.delete bullet
+                        @explosions.push Explosion.new(self,enemy.getx,enemy.gety)
+                        end
      			 end
    		 end 
 	def button_down(id)
@@ -50,7 +53,9 @@ class RAIDEN < Gosu::Window
 		@shoots.each do |shoot|
 			shoot.draw
 		end
-	
+        @explosions.each do|explosion|
+            explosion.draw
+        end
 	end
 end
 
