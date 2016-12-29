@@ -11,6 +11,7 @@ class RAIDEN < Gosu::Window
 	def initialize
 		super(WIDTH,HEIGHT)
 		self.caption = 'RAIDEN'
+        @image = Gosu::Image.new('images/back-triangle.png')
 		@player = Player.new(self)
 		@enemies=[]
 		@shoots=[]
@@ -57,6 +58,7 @@ class RAIDEN < Gosu::Window
 		end
 	end
 	def draw
+        @image.draw(0,0,1)
 		@player.draw
 		@enemies.each do |enemy|
 			enemy.draw
