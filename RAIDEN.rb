@@ -39,7 +39,18 @@ class RAIDEN < Gosu::Window
                         @explosions.push Explosion.new(self,enemy.getx,enemy.gety)
                         end
      			 end
-   		 end 
+   		 end
+        @explosions.dup.each do |explosion|
+            @explosions.delete explosion if explosion.getf
+        end
+        @enemies.dup.each do |enemy|
+            if enemy.gety>HEIGHT+enemy.radius
+                @enemies.delete enemy
+            end
+        end
+        @shoots.dup.each do |bullet|
+            @shoots.delete bullet unless bullet.onscreen?
+        end
 	def button_down(id)
 		if id==Gosu::KbSpace
 			@shoots.push Shoot.new(self, @player.x, @player.y,@player.angle)
